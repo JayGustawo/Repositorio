@@ -1,0 +1,3 @@
+Usuario
+sistema
+Conjunto de elementos orientados a un mismo fin.
