@@ -79,6 +79,7 @@ public class NN_agregarCliente extends javax.swing.JFrame {
         setLocation(new java.awt.Point(300, 230));
         setMinimumSize(new java.awt.Dimension(600, 280));
         setPreferredSize(new java.awt.Dimension(600, 280));
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);

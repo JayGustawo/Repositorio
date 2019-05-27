@@ -49,6 +49,7 @@ public class NN_PagoVerificacion extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(490, 150));
         setPreferredSize(new java.awt.Dimension(490, 150));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

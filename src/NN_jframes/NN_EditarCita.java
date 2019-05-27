@@ -153,6 +153,7 @@ public class NN_EditarCita extends javax.swing.JFrame {
         setLocation(new java.awt.Point(300, 230));
         setMinimumSize(new java.awt.Dimension(660, 550));
         setPreferredSize(new java.awt.Dimension(660, 550));
+        setResizable(false);
         setSize(new java.awt.Dimension(660, 550));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -445,9 +446,9 @@ public class NN_EditarCita extends javax.swing.JFrame {
         newAppointment.setMonth(newMonth);
         newAppointment.setYear(newYear);
         newAppointment.setReason(TA_razon.getText());
-        newAppointment.setHour(hour);
+        newAppointment.setHour(hour);   
         newAppointment.setHourValue(hourValue);
-        if(db.CheckAppointmentByTime(newDay, newMonth, newYear, hourValue) > 0){
+        if(db.CheckAppointmentByTime(newAppointment) > 0){
             JOptionPane.showMessageDialog(null, "Fecha y hora se encuentra ocupada, porfavor intente otra", "Fecha y hora ocupada", JOptionPane.INFORMATION_MESSAGE);
         }
         else if(!db.CheckAppointmentHour(newAppointment).equals("libre")){
@@ -457,6 +458,7 @@ public class NN_EditarCita extends javax.swing.JFrame {
             T_Success.setText("Se agrego correctamente la cita");
             refresh();
             appointmentMenu.refreshTable();
+            closing();
             } else {
             // no option
             }
@@ -466,6 +468,7 @@ public class NN_EditarCita extends javax.swing.JFrame {
             T_Success.setText("Se agrego correctamente la cita");
             refresh();
             appointmentMenu.refreshTable();
+            closing();
         }
         
     }

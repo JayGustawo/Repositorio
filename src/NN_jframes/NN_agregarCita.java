@@ -391,7 +391,7 @@ public class NN_agregarCita extends javax.swing.JFrame {
         int newDay = CBO_dia.getSelectedIndex()+1;
         String SnewYear = CBO_año.getSelectedItem().toString();
         int newYear = Integer.parseInt(SnewYear);
-        newAppointment.setId(db.getMaxAppointment()+1);
+        newAppointment.setId(db.getMax("APPOINTMENT"));
         newAppointment.setId_c(idClienteSolicita.getId());
         newAppointment.setId_e(manager.loggeduser.getId());
         newAppointment.setDay(newDay);
@@ -400,7 +400,7 @@ public class NN_agregarCita extends javax.swing.JFrame {
         newAppointment.setReason(TA_razon.getText());
         newAppointment.setHour(hour);
         newAppointment.setHourValue(hourValue);
-        if(db.CheckAppointmentByTime(newDay, newMonth, newYear, hourValue) > 0){
+        if(db.CheckAppointmentByTime(newAppointment) > 0){
             JOptionPane.showMessageDialog(null, "Fecha y hora se encuentra ocupada, porfavor intente otra", "Fecha y hora ocupada", JOptionPane.INFORMATION_MESSAGE);
         }
         else if(!db.CheckAppointmentHour(newAppointment).equals("libre")){

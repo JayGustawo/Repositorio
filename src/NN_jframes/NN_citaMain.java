@@ -116,7 +116,11 @@ public class NN_citaMain extends javax.swing.JFrame {
         
         B_eliminar.setOpaque(false);
         B_eliminar.setContentAreaFilled(false); //to make the content area transparent
-        B_eliminar.setBorderPainted(false); //to make the borders transparent        
+        B_eliminar.setBorderPainted(false); //to make the borders transparent   
+        
+        B_consulta.setOpaque(false);
+        B_consulta.setContentAreaFilled(false); //to make the content area transparent
+        B_consulta.setBorderPainted(false); //to make the borders transparent
     }
     
     /**
@@ -128,6 +132,11 @@ public class NN_citaMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        B_consulta = new javax.swing.JButton();
+        buttonS1 = new javax.swing.JLabel();
+        CBO_dia = new javax.swing.JComboBox<>();
+        CBO_mes = new javax.swing.JComboBox<>();
+        CBO_año = new javax.swing.JComboBox<>();
         Tab_text = new javax.swing.JLabel();
         TAB = new javax.swing.JLabel();
         Line = new javax.swing.JLabel();
@@ -157,6 +166,31 @@ public class NN_citaMain extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        B_consulta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        B_consulta.setForeground(new java.awt.Color(255, 255, 255));
+        B_consulta.setText("Consultar");
+        B_consulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_consultaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(B_consulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 23, 90, 30));
+
+        buttonS1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resource/NinaNails/Appmain/appMain_button.png"))); // NOI18N
+        getContentPane().add(buttonS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(898, 20, 90, 40));
+
+        CBO_dia.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        CBO_dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        getContentPane().add(CBO_dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, -1, -1));
+
+        CBO_mes.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        CBO_mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        getContentPane().add(CBO_mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, -1, -1));
+
+        CBO_año.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        CBO_año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
+        getContentPane().add(CBO_año, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         Tab_text.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         Tab_text.setForeground(new java.awt.Color(255, 255, 255));
@@ -352,6 +386,119 @@ public class NN_citaMain extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
+    private void B_consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_consultaActionPerformed
+        // TODO add your handling code here:
+        rTableFull();
+    }//GEN-LAST:event_B_consultaActionPerformed
+
+    public void rTableFull(){
+        boolean invalid = false;
+        DefaultTableModel amodel = (DefaultTableModel)table_cita.getModel();
+        amodel.setRowCount(0);
+        int dia = 0;
+        int año = 0;
+        int mes = 0;
+        dia = CBO_dia.getSelectedIndex();
+        if(CBO_año.getSelectedIndex()!=0){
+            año = Integer.parseInt(CBO_año.getSelectedItem().toString());    
+        }
+        mes = CBO_mes.getSelectedIndex()-1;
+        int c=0;
+        Appointment query[] = null;
+        if(CBO_dia.getSelectedIndex()==0 && CBO_mes.getSelectedIndex() ==0 && CBO_año.getSelectedIndex()==0){
+            refreshTable();
+            invalid = true;
+        }
+        if(CBO_dia.getSelectedIndex()==0 && CBO_mes.getSelectedIndex()==0 && CBO_año.getSelectedIndex()!=0){
+            query = db.getAppointmentsByYear(año);
+        }
+        if(CBO_dia.getSelectedIndex()==0 && CBO_año.getSelectedIndex()==0 && CBO_mes.getSelectedIndex()!=0){
+            query = db.getAppointmentsByMonth(mes);
+        }
+        if(CBO_año.getSelectedIndex()==0 && CBO_mes.getSelectedIndex()==0 && CBO_dia.getSelectedIndex()!=0){
+            query = db.getAppointmentsByDay(dia);
+        }
+        if(CBO_dia.getSelectedIndex()==0 && CBO_mes.getSelectedIndex()!=0 && CBO_año.getSelectedIndex()!=0){
+            query = db.getAppointmentsByMonthYear(mes,año);
+        }
+        if(CBO_mes.getSelectedIndex()!=0 && CBO_dia.getSelectedIndex()!=0 && CBO_año.getSelectedIndex()==0){
+            query = db.getAppointmentsByMonthDay(mes,dia);
+        }
+        if(CBO_mes.getSelectedIndex()==0 && CBO_dia.getSelectedIndex()!=0 && CBO_año.getSelectedIndex()!=0){
+            query = db.getAppointmentsByDayYear(dia,año);
+        }
+        if(CBO_mes.getSelectedIndex()!=0 && CBO_dia.getSelectedIndex()!=0 && CBO_año.getSelectedIndex()!=0){
+            query = db.getAppointmentsByDate(dia,mes,año);   
+        }
+        if(!invalid){
+            try {
+            String colhead[]={"ID","Cliente","Empleado","Dia","Mes","Año","Hora","Razon"};
+            amodel.setColumnIdentifiers(colhead);   
+            int cols=8;
+            int max = query.length;
+            while(c < max){
+                Object[] obj=new Object[cols];
+                for(int i=0; i<cols; i++){
+                    if(i==0){
+                        obj[i]= query[c].getId();
+                    }
+                    else if(i==1){
+                        obj[i]= idToClientName(query[c].getId_c());
+                    }
+                    else if(i==2){
+                        obj[i]= idToEmployeeName(query[c].getId_e());
+                    }
+                    else if(i==3){
+                        obj[i]= query[c].getDay();
+                    }
+                    else if(i==4){
+                       switch (query[c].getMonth()){
+                           case 0:  obj[i]= "Enero";
+                           break;
+                           case 1:  obj[i]= "Febrero";
+                           break;
+                           case 2:  obj[i]= "Marzo";
+                           break;
+                           case 3:  obj[i]= "Abril";
+                           break;
+                           case 4:  obj[i]= "Mayo";
+                           break;
+                           case 5:  obj[i]= "Junio";
+                           break;
+                           case 6:  obj[i]= "Julio";
+                           break;
+                           case 7:  obj[i]= "Agosto";
+                           break;
+                           case 8:  obj[i]= "Septiembre";
+                           break;
+                           case 9:  obj[i]= "Octubre";
+                           break;
+                           case 10:  obj[i]= "Noviembre";
+                           break;
+                           case 11:  obj[i]= "Diciembre";
+                           break;
+                       }
+                    }
+                    else if(i==5){
+                        obj[i]=query[c].getYear();
+                    }
+                    else if(i==6){
+                        obj[i]=query[c].getHour();
+                    }
+                    else if(i==7){
+                        obj[i]=query[c].getReason();
+                    }
+                }
+                amodel.addRow(obj);
+                c++;
+            }
+        }catch(Exception e){
+        }
+        table_cita.setDefaultEditor(Object.class, null);
+        }
+        
+    }
+    
     public void refreshTable(){
         DefaultTableModel amodel = (DefaultTableModel)table_cita.getModel();
         amodel.setRowCount(0);
@@ -487,9 +634,13 @@ public class NN_citaMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BG;
     private javax.swing.JButton B_agregar;
+    private javax.swing.JButton B_consulta;
     private javax.swing.JButton B_editar;
     private javax.swing.JButton B_eliminar;
     private javax.swing.JButton B_salir;
+    private javax.swing.JComboBox<String> CBO_año;
+    private javax.swing.JComboBox<String> CBO_dia;
+    private javax.swing.JComboBox<String> CBO_mes;
     private javax.swing.JLabel Line;
     private javax.swing.JScrollPane SP_table;
     private javax.swing.JLabel TAB;
@@ -500,6 +651,7 @@ public class NN_citaMain extends javax.swing.JFrame {
     private javax.swing.JLabel buttonE;
     private javax.swing.JLabel buttonED;
     private javax.swing.JLabel buttonS;
+    private javax.swing.JLabel buttonS1;
     private javax.swing.JTable table_cita;
     private javax.swing.JLabel text_Message;
     // End of variables declaration//GEN-END:variables

@@ -146,6 +146,7 @@ public class NN_InventarioMain extends javax.swing.JFrame {
         setTitle("Inventario");
         setLocation(new java.awt.Point(100, 100));
         setMinimumSize(new java.awt.Dimension(985, 700));
+        setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);

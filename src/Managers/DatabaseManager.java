@@ -54,6 +54,326 @@ public class DatabaseManager {
         }
     }
     
+    public Appointment[] getAppointmentsByDate(int dayQ, int monthQ, int yearQ){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE DAY = ? AND MONTH = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,dayQ);
+            preparedStatement.setInt(2,monthQ);
+            preparedStatement.setInt(3,yearQ);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByDayYear(int day,int year){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * WHERE DAY = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,day);
+            preparedStatement.setInt(2,year);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByMonthYear(int mes, int año){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE MONTH = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            preparedStatement.setInt(2,año);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByMonthDay(int mes,int dia){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE MONTH = ? AND DAY = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            preparedStatement.setInt(2,dia);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByDay(int day){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE DAY = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,day);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByMonth(int mes){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE MONTH = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Appointment[] getAppointmentsByYear(int año){
+        Appointment[] apprs = new Appointment[1000];
+        String adminStatement = "Select * from APPOINTMENT WHERE YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,año);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Appointment appmnt = new Appointment();
+                appmnt.setId(rs.getInt("ID"));
+                appmnt.setId_c(rs.getInt("ID_C"));
+                appmnt.setId_e(rs.getInt("ID_E"));
+                appmnt.setDay(rs.getInt("DAY"));
+                appmnt.setMonth(rs.getInt("MONTH"));
+                appmnt.setYear(rs.getInt("YEAR"));
+                appmnt.setHour(rs.getString("HOUR"));
+                appmnt.setReason(rs.getString("REASON"));
+                apprs[c] = appmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
     public void openDB() { //Realiza la conexion con la base de datos
         try {
 
@@ -188,16 +508,18 @@ public class DatabaseManager {
         return rs;
     }
     
-    public int CheckAppointmentByTime (int newDay, int newMonth, int newYear, double newHValue){
+    
+    public int CheckAppointmentByTime (Appointment Check){
         int count = 0;
-        String selectStatement = "Select ID, ID_C, ID_E,DAY,MONTH,YEAR,HOUR,COST,REASON,HOURVALUE from APPOINTMENT where DAY = ? AND MONTH = ?  AND YEAR = ? AND HOURVALUE = ? order by ID";
+        String selectStatement = "Select ID, ID_C, ID_E,DAY,MONTH,YEAR,HOUR,COST,REASON,HOURVALUE from APPOINTMENT where NOT ID = ? AND DAY = ?  AND MONTH = ? AND YEAR = ? AND  HOURVALUE = ? order by ID  ";
         PreparedStatement preparedStatement = null;
         try{
             preparedStatement = conn.prepareStatement(selectStatement);
-            preparedStatement.setInt(1, newDay);
-            preparedStatement.setInt(2, newMonth);
-            preparedStatement.setInt(3, newYear);
-            preparedStatement.setDouble(4, newHValue);
+            preparedStatement.setInt(1, Check.getId());
+            preparedStatement.setInt(2, Check.getDay());
+            preparedStatement.setInt(3, Check.getMonth());
+            preparedStatement.setInt(4, Check.getYear());
+            preparedStatement.setDouble(5, Check.getHourValue());
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 count++;
@@ -298,6 +620,41 @@ public class DatabaseManager {
             }
         }
         return maxVal;
+    }
+    
+    public boolean checkUser(String username){
+        boolean exist = true;
+        int count = 0;
+        String selectStatement = "Select * from EMPLOYEE where USERNAME = ? order by ID";
+        PreparedStatement preparedStatement = null;
+        try{
+            preparedStatement = conn.prepareStatement(selectStatement);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                count++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        if(count>0){
+            exist = false;
+        }
+        return exist;
     }
     
     public int getMaxAppointment(){
@@ -1274,7 +1631,319 @@ public class DatabaseManager {
         return appointments;
     }*/
     
-        
+    //PAYMENTS
+    public Payment[] getPaymentsByDate(int dayQ, int monthQ, int yearQ){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE DAY = ? AND MONTH = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,dayQ);
+            preparedStatement.setInt(2,monthQ);
+            preparedStatement.setInt(3,yearQ);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByDayYear(int day,int year){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE DAY = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,day);
+            preparedStatement.setInt(2,year);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByMonthYear(int mes, int año){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE MONTH = ? AND YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            preparedStatement.setInt(2,año);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByMonthDay(int mes,int dia){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE MONTH = ? AND DAY = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            preparedStatement.setInt(2,dia);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByDay(int day){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE DAY = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,day);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByMonth(int mes){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE MONTH = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,mes);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
+    
+    public Payment[] getPaymentsByYear(int año){
+        Payment[] apprs = new Payment[1000];
+        String adminStatement = "Select * from PAYMENT WHERE YEAR = ? ORDER BY ID ASC";
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;    
+        try{
+            preparedStatement = conn.prepareStatement(adminStatement);
+            preparedStatement.setInt(1,año);
+            rs = preparedStatement.executeQuery();
+            //preparedStatement.close();
+            int c=0;
+            while(rs.next() ){
+                Payment pmnt = new Payment();
+                pmnt.setId(rs.getInt("ID"));
+                pmnt.setId_a(rs.getInt("ID_A"));
+                pmnt.setAmount(rs.getFloat("AMOUNT"));
+                pmnt.setDay(rs.getInt("DAY"));
+                pmnt.setMonth(rs.getInt("MONTH"));
+                pmnt.setYear(rs.getInt("YEAR"));
+                pmnt.setId_e(rs.getInt("ID_E"));
+                apprs[c] = pmnt;
+                c++;
+            }try{
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            } 
+        }catch(SQLException sqlex ){
+            //disone
+            System.out.println(sqlex.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException sqlex) {
+                System.out.println(sqlex.getMessage());
+
+            }
+        }
+        return apprs;
+    }
 
     public void closeConnection() {
         try {

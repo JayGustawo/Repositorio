@@ -340,6 +340,10 @@ public class NN_editarEmpleado extends javax.swing.JFrame {
             okPass = false;
             JOptionPane.showMessageDialog(null, "El password no puede ser password", "Error en el password", JOptionPane.INFORMATION_MESSAGE);
         }
+        if(db.checkUser(addRole)){
+            okUsername = false;
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre", "Error en el usuario", JOptionPane.INFORMATION_MESSAGE);
+        }
         if(!TB_telefono.getText().equals("")){
             try{
                 addPhone = Long.parseLong(TB_telefono.getText());

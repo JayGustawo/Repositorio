@@ -337,6 +337,10 @@ public class NN_agregarEmpleado extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El numero de telefono no puede contener letras y debe ser menor a 20 caracteres", "Error en Telefono", JOptionPane.INFORMATION_MESSAGE);
             }
         } 
+        if(db.checkUser(addRole)){
+            okUsername = false;
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre", "Error en el usuario", JOptionPane.INFORMATION_MESSAGE);
+        }
         if(okLName && okFName && okPhone && okBoth && okAddress && okUsername && okPass && valFN && valLN){
             Employee addEmploy = new Employee();
             addEmploy.setFirstName(TB_firstName.getText());
